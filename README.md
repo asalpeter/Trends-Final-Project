@@ -31,7 +31,7 @@ Leaderboard: Compete with other players on a global leaderboard to claim the top
    ```
 2. Navigate to the project directory:
    ```bash
-   cd Trends-Final-Project
+   cd Final
    ```
 3. Install dependencies:
    ```bash
