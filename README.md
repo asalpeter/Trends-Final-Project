@@ -63,4 +63,4 @@ Check the leaderboard to see your rank among other players!
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](Final/LICENSE) file for details.
