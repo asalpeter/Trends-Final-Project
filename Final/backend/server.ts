@@ -61,7 +61,21 @@ app.put('/update-score', async (req, res) => {
   }
 });
 
+app.delete('/delete-account', async (req, res) => {
+  const { userId } = req.body;
 
+  if (!userId) {
+    return res.status(400).send({ message: 'userId is required' });
+  }
+
+  try {
+    await db.collection('leaderboard').doc(userId).delete();
+    res.status(200).send({ message: 'Account and data deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting account and data:', error);
+    res.status(500).send({ message: 'Failed to delete account and data' });
+  }
+});
 
 app.get('/player/:id', async (req, res) => {
   const { id } = req.params;
@@ -75,7 +89,7 @@ app.get('/player/:id', async (req, res) => {
     }
 
     const playerData = doc.data();
-    res.status(200).json(playerData); // Send player data including bestStreak
+    res.status(200).json(playerData);
   } catch (error) {
     console.error('Error fetching player data:', error);
     res.status(500).json({ error: 'Failed to fetch player data' });
@@ -86,9 +100,8 @@ app.get('/player/:id', async (req, res) => {
 app.post('/create-player', async (req, res) => {
   const { playerId, score, name} = req.body;
   try {
-    // Create or update a document in the "leaderboard" collection using playerId
     await db.collection('leaderboard').doc(playerId).set({
-      name: name || 'Anonymous', // Use default name if not provided
+      name: name || 'Anonymous',
       score: score,
       playerId : playerId,
     });

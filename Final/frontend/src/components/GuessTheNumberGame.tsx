@@ -18,7 +18,7 @@ const GuessTheNumberGame = () => {
         return () => unsubscribe();
     }, []);
 
-    const [secretNumber, setSecretNumber] = useState(1);
+    const [secretNumber, setSecretNumber] = useState(generateRandomNumber);
 
     useEffect(() => {
         const loadBestStreak = async () => {
@@ -64,7 +64,7 @@ const GuessTheNumberGame = () => {
 
     const resetGame = (guessedCorrectly:boolean) => {
         setGuessesLeft(3);
-        setSecretNumber(1);
+        setSecretNumber(generateRandomNumber);
 
         if (!guessedCorrectly) {
             setCurrentStreak(0);

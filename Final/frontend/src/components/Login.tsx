@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { signInWithGoogle, logOut } from "./auth";
+import { signInWithGoogle, logOut , auth} from "./auth";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { auth } from "./auth";
 
 const AuthComponent = () => {
-  const [user, setUser] = useState<User | null>(null); 
+  const [user, setUser] = useState<User | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [error, setError] = useState('');
 
   // Monitor auth state
   useEffect(() => {
@@ -23,6 +24,38 @@ const AuthComponent = () => {
     await logOut();
   };
 
+  const handleDeleteAccount = async () => {
+    if (user) {
+      setIsDeleting(true);
+      setError('');
+
+      try {
+        const response = await fetch("http://localhost:8080/delete-account", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: user.email }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          alert("Your account has been deleted.");
+          await logOut(); // Log out the user after successful deletion
+          window.location.href = "/login"; // Redirect to login page or home
+        } else {
+          setError(result.message || "Failed to delete account");
+        }
+      } catch (error) {
+        console.error("Error deleting account:", error);
+        setError("Something went wrong. Please try again later.");
+      } finally {
+        setIsDeleting(false);
+      }
+    }
+  };
+
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       {user ? (
@@ -31,6 +64,15 @@ const AuthComponent = () => {
           <button onClick={handleSignOut} style={styles.logoutBtn}>
             Sign Out
           </button>
+          <br />
+          <button
+            onClick={handleDeleteAccount}
+            style={styles.deleteBtn}
+            disabled={isDeleting}
+          >
+            {isDeleting ? "Deleting..." : "Delete My Account"}
+          </button>
+          {error && <p style={{ color: "red" }}>{error}</p>}
         </>
       ) : (
         <button onClick={handleSignIn} style={styles.loginBtn}>
@@ -57,6 +99,15 @@ const styles = {
     padding: "10px 20px",
     borderRadius: "5px",
     cursor: "pointer",
+  },
+  deleteBtn: {
+    backgroundColor: "#FF6347", // Tomato color for Delete button
+    color: "#FFF",
+    border: "none",
+    padding: "10px 20px",
+    borderRadius: "5px",
+    cursor: "pointer",
+    marginTop: "10px",
   },
 };
 
