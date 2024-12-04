@@ -1,6 +1,7 @@
 # Guess That Number
 A simple and fun number guessing game! Guess a number between 1 and 10, and the game will tell you if your guess is too low or too high. You have 3 tries to guess correctly. Log in to track your best streaks and compete with others on the leaderboard!
 
+
 ## Description
 This is a web-based number guessing game where:
 
@@ -12,6 +13,7 @@ Logged-in players can track their best streak of correctly guessing within 3 tri
 
 A leaderboard showcases the top players with the best streaks.
 
+
 ## Features
 Number Guessing: Players can guess numbers between 1 and 10, receiving hints after each guess.
 
@@ -21,7 +23,7 @@ Streak Tracking: Logged-in users can see their best streak of correct guesses wi
 
 Leaderboard: Compete with other players on a global leaderboard to claim the top spot.
 
-## Installation
+
 ## Installation
 1. Clone the repository:
    ```bash
@@ -43,6 +45,7 @@ Leaderboard: Compete with other players on a global leaderboard to claim the top
    
 5. Access the project:
    Open your browser and navigate to http://localhost:3000.
+
 
 ## Usage
 Play as a Guest:
