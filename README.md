@@ -31,7 +31,7 @@ Leaderboard: Compete with other players on a global leaderboard to claim the top
    ```
 2. Navigate to the project directory:
    ```bash
-   cd Trends-Final-Project
+   cd Final
    ```
 3. Install dependencies:
    ```bash
@@ -44,7 +44,7 @@ Leaderboard: Compete with other players on a global leaderboard to claim the top
    ```
    
 5. Access the project:
-   Open your browser and navigate to http://localhost:3000.
+   Open your browser and navigate to http://localhost:5173.
 
 
 ## Usage
